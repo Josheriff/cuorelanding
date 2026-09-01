@@ -32,6 +32,6 @@
 ## SEO and technical
 
 - Improved title, meta description, Open Graph copy and service structured data for B2B custom CRM intent.
-- Updated visible FAQ content and matching FAQ structured data.
+- Updated visible FAQ content and matching FAQ structured data..
 - Added `robots.txt`, `sitemap.xml`, canonical URLs and an indexable privacy page.
 - Verified JavaScript syntax, JSON-LD, internal anchors, CSS structure and local HTTP delivery.
