@@ -261,6 +261,43 @@
     if (typeof mobile.addEventListener === "function") mobile.addEventListener("change", update);
   }
 
+  function initTabs() {
+    var tablist = document.querySelector('[role="tablist"]');
+    if (!tablist) return;
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+    if (!tabs.length) return;
+
+    function activate(tab, setFocus) {
+      tabs.forEach(function (t) {
+        var selected = t === tab;
+        t.classList.toggle("is-active", selected);
+        t.setAttribute("aria-selected", selected ? "true" : "false");
+        t.setAttribute("tabindex", selected ? "0" : "-1");
+        var panel = document.getElementById(t.getAttribute("aria-controls"));
+        if (panel) panel.classList.toggle("is-active", selected);
+      });
+      if (setFocus) tab.focus();
+    }
+
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () {
+        activate(tab, false);
+      });
+      tab.addEventListener("keydown", function (event) {
+        var next = null;
+        switch (event.key) {
+          case "ArrowRight": next = tabs[(index + 1) % tabs.length]; break;
+          case "ArrowLeft": next = tabs[(index - 1 + tabs.length) % tabs.length]; break;
+          case "Home": next = tabs[0]; break;
+          case "End": next = tabs[tabs.length - 1]; break;
+          default: return;
+        }
+        event.preventDefault();
+        activate(next, true);
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.classList.remove("no-js");
     captureAttribution();
@@ -272,6 +309,7 @@
     initScrollDepth();
     initReveals();
     initStickyCta();
+    initTabs();
 
     var year = document.getElementById("year");
     if (year) year.textContent = String(new Date().getFullYear());
