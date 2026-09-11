@@ -1,5 +1,11 @@
 # Implementation Report — Landing Changes
 
+> **Historical record — superseded.** This report documents the earlier CRM-era round and quotes the
+> copy that was live on 2026-09-03. The page now sells a custom ERP and business operations software
+> service: read `CHANGES.md` and `ERP-MIGRATION-REPORT.md` for the current state and do not reuse the
+> CRM strings below as copy. `tools/verify.mjs` intentionally excludes this file from its
+> American-English and terminology scans so the record stays intact.
+
 Date: 2026-09-03
 Spec: `LANDING_CHANGES_TEXT.md`
 

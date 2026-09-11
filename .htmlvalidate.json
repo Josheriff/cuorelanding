@@ -1,0 +1,12 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "void-style": "off",
+    "attribute-allowed-values": "error",
+    "element-required-attributes": "error",
+    "wcag/h30": "error",
+    "wcag/h32": "error",
+    "wcag/h67": "error",
+    "wcag/h71": "error"
+  }
+}

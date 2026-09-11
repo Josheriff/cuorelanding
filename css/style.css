@@ -1,5 +1,5 @@
 /* ============================================================
-   Cuore Tech — Custom CRM Development
+   Cuore Tech — Custom ERP Development
    style.css — static landing page, zero dependencies
    ============================================================ */
 
@@ -429,7 +429,7 @@ button {
   line-height: 1.08;
   letter-spacing: -0.03em;
   color: #fff;
-  max-width: 18ch;
+  max-width: 22ch;
   margin-bottom: 20px;
 }
 
@@ -441,13 +441,11 @@ button {
   margin-bottom: 32px;
 }
 
-.hero-brand-line {
-  font-size: 1.25rem;
-  line-height: 1.5;
+.hero-qualify {
+  margin-top: 14px;
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--text-on-dark);
-  max-width: 34ch;
-  margin-bottom: 28px;
+  color: #CBD5E1;
 }
 
 .hero-actions {
@@ -490,28 +488,6 @@ button {
   border-color: var(--blue-400);
 }
 
-.hero-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 22px;
-  margin-top: 24px;
-  color: #CBD5E1;
-  font-size: 0.9375rem;
-}
-
-.hero-trust li {
-  position: relative;
-  padding-left: 17px;
-}
-
-.hero-trust li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--green-400);
-  font-weight: 700;
-}
-
 /* ---------- Hero mockup ---------- */
 .hero-mockup {
   position: relative;
@@ -523,6 +499,15 @@ button {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card-dark);
   overflow: hidden;
+}
+
+/* Caption under the hero mockup: states that the interface is a concept. */
+.mockup-caption {
+  margin: 10px 0 0;
+  max-width: 520px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted-dark);
 }
 
 .mockup-topbar {
@@ -705,14 +690,14 @@ button {
   padding: 1px 8px;
 }
 
-.deal-card {
+.po-card {
   background: #161B24;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 10px 12px;
 }
 
-.deal-name {
+.po-name {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-on-dark);
@@ -722,7 +707,7 @@ button {
   text-overflow: ellipsis;
 }
 
-.deal-meta {
+.po-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -731,7 +716,7 @@ button {
   color: var(--text-muted-dark);
 }
 
-.deal-amount {
+.po-amount {
   font-weight: 600;
   color: var(--text-on-dark);
 }
@@ -1101,6 +1086,30 @@ button {
   line-height: 1.7;
   color: var(--text-muted-dark);
   max-width: 62ch;
+}
+
+/* ---------- Qualification CTA inside the fit comparison ---------- */
+.fit-cta {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.fit-cta-text {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-weight: 600;
+  color: var(--text-on-light);
+  max-width: 60ch;
+}
+
+@media (min-width: 720px) {
+  .fit-cta {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 /* ---------- Positioning quote ---------- */
@@ -1842,9 +1851,10 @@ html:not(.no-js) .dash-panel + .dash-panel {
   overflow: hidden;
 }
 
+.dash-frame-retail { border-top: 4px solid var(--teal-500); }
+.dash-frame-restaurant { border-top: 4px solid var(--amber-500); }
 .dash-frame-travel { border-top: 4px solid var(--blue-600); }
-.dash-frame-distribution { border-top: 4px solid var(--teal-500); }
-.dash-frame-services { border-top: 4px solid var(--violet-500); }
+.dash-frame-manufacturing { border-top: 4px solid var(--violet-500); }
 
 .dash-head {
   display: flex;
@@ -2150,5 +2160,54 @@ html:not(.no-js) .dash-panel + .dash-panel {
   margin-top: 20px;
   font-size: 0.9375rem;
   line-height: 1.6;
+  color: var(--text-muted-light);
+}
+
+/* Stacked blocks inside a dashboard frame need their own rhythm. */
+.dash-frame > .dash-block + .dash-block,
+.dash-frame > .dash-chiprow {
+  margin-top: 16px;
+}
+
+/* Amber banner variant used by the restaurant example. */
+.dash-banner-amber .dash-banner-main {
+  background: var(--amber-100);
+  border-color: #FDE68A;
+}
+
+.dash-banner-amber .dash-banner-value {
+  color: #92400E;
+}
+
+/* Peak-capacity bar fill. */
+.fill-red { background: var(--red-600); }
+
+/*
+ * Fixed bar/stage widths. Declared as utilities so the dashboard markup
+ * stays free of inline styles (and of style-attribute drift).
+ */
+.dash-w-16 { width: 16%; }
+.dash-w-22 { width: 22%; }
+.dash-w-34 { width: 34%; }
+.dash-w-38 { width: 38%; }
+.dash-w-42 { width: 42%; }
+.dash-w-46 { width: 46%; }
+.dash-w-47 { width: 47%; }
+.dash-w-58 { width: 58%; }
+.dash-w-68 { width: 68%; }
+.dash-w-81 { width: 81%; }
+.dash-w-88 { width: 88%; }
+.dash-w-93 { width: 93%; }
+.dash-w-96 { width: 96%; }
+.dash-w-97 { width: 97%; }
+.dash-w-100 { width: 100%; }
+
+/* Per-panel illustrative disclaimer, shown with every example. */
+.dash-disclaimer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #F1F5F9;
+  font-size: 0.8125rem;
+  line-height: 1.5;
   color: var(--text-muted-light);
 }
