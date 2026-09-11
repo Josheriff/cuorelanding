@@ -3,6 +3,11 @@
 
   var SITE_CONFIG = {
     googleFormEndpoint: "https://docs.google.com/forms/d/e/1FAIpQLSe98q9LdffZJThYr-Le6N9Yy1fGnYGBNlsxHgqKSUmL7QFijA/formResponse",
+    // The live Form currently has four questions, so these are the only entry ids that exist.
+    // GCLID/UTM values are appended to the "current setup" answer as an [Attribution] text block
+    // because the Form has no dedicated attribution questions. Getting attribution into its own
+    // Google Sheet columns means adding those questions to the Form first, then adding their
+    // entry ids here - do not invent entry ids, they must be copied from the live Form.
     googleFormEntries: {
       goal: "entry.1467467639",
       bottleneck: "entry.1006754821",
@@ -95,9 +100,9 @@
       if (!cta) return;
       var section = cta.getAttribute("data-cta-section") || "unknown";
       if (cta.hasAttribute("data-cta-form")) {
-        track("crm_cta_click", { cta_location: section });
+        track("main_cta_click", { cta_location: section });
       } else {
-        track("crm_email_click", { cta_location: section });
+        track("email_click", { cta_location: section });
       }
     });
   }
@@ -122,7 +127,7 @@
       if (!submitButton) return;
       submitButton.disabled = value;
       submitButton.setAttribute("aria-busy", value ? "true" : "false");
-      submitButton.textContent = value ? "Sending..." : "Request My Free CRM Fit Review";
+      submitButton.textContent = value ? "Sending..." : "Request My Free Fit Review";
     }
 
     form.addEventListener("submit", function (event) {
@@ -159,11 +164,11 @@
         keepalive: true
       })
         .then(function () {
-          track("generate_lead", { form_name: "crm_fit_review" });
-          track("crm_form_submit", { method: "google_forms" });
+          track("generate_lead", { form_name: "erp_fit_review" });
+          track("lp_form_submit", { method: "google_forms" });
           sendConversion(email, name);
           form.reset();
-          setStatus("Thank you. We received your request and will contact you to arrange your free CRM Fit Review.", false);
+          setStatus("Thank you. Your request has been submitted. We review every inquiry personally and reply within 1 business day.", false);
         })
         .catch(function () {
           setStatus("We could not send your request. Please try again or email " + SITE_CONFIG.contactEmail + ".", true);
@@ -201,7 +206,7 @@
         SCROLL_THRESHOLDS.forEach(function (threshold) {
           if (!reached[threshold] && percent >= threshold) {
             reached[threshold] = true;
-            track("crm_scroll_depth", { percent: threshold });
+            track("lp_scroll_depth", { percent: threshold });
           }
         });
       }
@@ -245,8 +250,9 @@
     var finalVisible = false;
     function update() {
       var show = mobile.matches && !heroVisible && !finalVisible;
+      // Toggling .is-visible is enough: the hidden state uses visibility:hidden,
+      // which already removes the sticky link from the accessibility tree.
       sticky.classList.toggle("is-visible", show);
-      sticky.setAttribute("aria-hidden", show ? "false" : "true");
     }
 
     var observer = new IntersectionObserver(function (entries) {
@@ -302,7 +308,7 @@
     document.documentElement.classList.remove("no-js");
     captureAttribution();
     bootstrapGtag();
-    track("crm_page_view", {});
+    track("lp_page_view", {});
     wireCTAs();
     initContactForm();
     initMobileNav();
